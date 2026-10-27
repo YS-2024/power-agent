@@ -1,0 +1,20 @@
+name: power-agent
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: power_agent
+      POSTGRES_DB: power_agent
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U power_agent -d power_agent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  postgres_data:

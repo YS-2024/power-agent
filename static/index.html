@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142a27"><title>电知 · 电力知识助手</title>
+  <link rel="stylesheet" href="/styles.css"><script src="/chat-utils.js" defer></script><script src="/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="电知首页"><span class="brand-icon">ϟ</span><span>电知<span class="brand-en">POWER KNOWLEDGE</span></span></a>
+    <div class="workspace-tag"><span class="status-dot"></span> 本地知识工作台</div>
+    <nav aria-label="主导航">
+      <button class="nav-item active" data-page="daily"><span>☏</span> 智能助手 <span class="nav-arrow">↗</span></button>
+      <button class="nav-item" data-page="chat"><span>◈</span> 资料研读</button>
+      <button class="nav-item" data-page="library"><span>▤</span> 资料库 <span id="nav-doc-count" class="count">0</span></button>
+      <button class="nav-item" data-page="reports"><span>▧</span> 研究报告</button>
+    </nav>
+    <div class="sidebar-note"><div class="note-orbit">✳</div><strong>让每个答案，有据可查。</strong><p>连接电力知识与实际问题，<br>从资料出发，回到依据。</p></div>
+    <div class="sidebar-footer"><span class="avatar">P</span><div>个人工作空间<small>资料保存在本机</small></div><span class="footer-dot">●</span></div>
+  </aside>
+  <main>
+    <header class="topbar"><div><span class="breadcrumb">工作空间</span><span class="slash">/</span><span id="page-label">智能助手</span></div><span id="mode-badge" class="mode-badge">正在连接…</span></header>
+    <div class="main-body">
+      <section id="page-chat" class="page" hidden>
+        <div class="eyebrow">ELECTRIC POWER INTELLIGENCE <span>01 / 知识问答</span></div>
+        <div class="hero"><div><h1>从一个问题，<br>找到<span>可靠的依据。</span></h1><p>检索电力资料、理解专业概念，让知识转化为可追溯的答案。</p></div><div class="hero-graphic" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="core">ϟ</div><span class="graphic-label">KNOWLEDGE<br>CONNECTED</span><i class="node node-one"></i><i class="node node-two"></i></div></div>
+        <div class="stats"><div><span class="stat-icon">▤</span><span><b id="doc-count">—</b><small>知识文档</small></span></div><div><span class="stat-icon">⌘</span><span><b id="chunk-count">—</b><small>可检索片段</small></span></div><div><span class="stat-icon">↗</span><span><b>来源可追溯</b><small>文档 · 原文 · 行号</small></span></div></div>
+        <div id="chat-log" class="chat-log" aria-live="polite"></div>
+        <form id="ask-form" class="composer">
+          <label for="question">今天想了解什么？</label><textarea id="question" maxlength="2000" rows="3" placeholder="例如：功率因数是什么？有功功率和视在功率有什么关系？" required></textarea>
+          <div class="composer-bottom"><span class="composer-hint"><span class="status-dot"></span> 基于本地知识库回答 <span class="key-hint">Enter 发送 · Shift+Enter 换行</span></span><button id="ask-button" class="primary" type="submit">开始提问 <span>↗</span></button></div>
+        </form>
+        <div id="model-note" class="subnote">本地摘录模式：检索并展示原文。配置模型后可生成综合回答。</div>
+        <div class="section-heading"><h2>从这些问题开始</h2><span>EXPLORE YOUR KNOWLEDGE</span></div>
+        <div class="suggestions"><button data-question="kW 和 kWh 有什么区别？"><span class="suggestion-tag">基础概念</span><strong>功率与电量，有什么区别？</strong><span class="suggestion-bottom">从 kW 到 kWh <b>↗</b></span></button><button data-question="功率因数与有功功率、视在功率有什么关系？"><span class="suggestion-tag">专业知识</span><strong>如何理解功率因数？</strong><span class="suggestion-bottom">理清交流电中的功率关系 <b>↗</b></span></button><button data-question="电气检修资料有哪些适用边界？"><span class="suggestion-tag">资料研读</span><strong>检修资料应该怎么读？</strong><span class="suggestion-bottom">识别依据与适用边界 <b>↗</b></span></button></div>
+      </section>
+      <section id="page-daily" class="page">
+        <div class="eyebrow">YOUR PERSONAL KNOWLEDGE ASSISTANT <span>智能助手</span></div>
+        <h1 class="page-title">随时聊聊，<span>一起弄懂。</span></h1>
+        <p class="intro">日常交流、专业答疑，也能看图。需要资料时自动检索，结合上下文组织回答，让对话接着聊下去。</p>
+        <div class="daily-toolbar"><span id="daily-model-note" class="subnote">正在连接模型…</span><button id="daily-clear" class="quiet" type="button">新建对话 ＋</button></div>
+        <div class="conversation-controls"><label for="conversation-select">历史会话</label><select id="conversation-select"><option value="">新对话</option></select><button id="conversation-delete" class="quiet" type="button">删除会话</button><button id="memory-open" class="quiet" type="button">长期记忆</button><label class="memory-toggle"><input id="memory-enabled" type="checkbox" checked>使用并更新记忆</label></div>
+        <p class="subnote">聊天和图片保存在本机数据库，刷新后可继续；记忆跨会话使用，可查看、修改和删除。关闭记忆后本轮不读取或新增长期记忆，但当前会话仍有上下文。</p>
+        <button id="conversation-older" class="quiet" type="button" hidden>加载更早消息</button>
+        <div id="daily-log" class="daily-log" role="log" aria-label="智能助手聊天记录" aria-live="polite">
+          <div id="daily-welcome" class="daily-welcome"><span>☏</span><h2>你好，有什么想聊的？</h2><p>可以直接提问，也可以告诉我你的学习目标和回答偏好。</p><div class="daily-prompts"><button class="quiet" data-daily="我今天有点累，陪我聊聊吧。">陪我聊聊天</button><button class="quiet" data-daily="结合资料库，用容易理解的例子解释功率因数。">聊聊电力知识</button><button class="quiet" data-daily="请记住：我是电力初学者，回答时先用简单例子，再解释专业术语。">记住我的偏好</button></div></div>
+        </div>
+        <div id="daily-error" class="notice" role="alert" hidden></div>
+        <form id="daily-form" class="composer">
+          <label for="daily-message">发一条消息</label><textarea id="daily-message" maxlength="2000" rows="3" placeholder="输入问题，或粘贴、拖入图片。Enter 发送，Shift+Enter 换行…"></textarea>
+          <div id="image-previews" class="image-previews" aria-label="待发送图片"></div>
+          <div class="image-controls"><label class="quiet image-picker" for="daily-images">＋ 添加图片<input id="daily-images" type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple></label><span id="image-status" class="subnote" role="status">最多 4 张 · PNG / JPEG / WebP / GIF</span></div>
+          <div class="composer-bottom"><span class="composer-hint">Enter 发送 · Shift+Enter 换行</span><button id="daily-stop" class="primary" type="button" hidden>■ 停止生成</button><button id="daily-send" class="primary" type="submit">发送消息 ↗</button></div>
+        </form>
+        <p class="subnote">单张原图最大 10 MB，自动优化到最长边 2048 像素；GIF 仅取首帧。回答使用最近对话、会话摘要和启用的长期记忆，最多携带 8 张上下文图片。相关内容发送至配置的模型服务；资料检索会使用向量接口。当前是本机单用户工作空间。</p>
+      </section>
+      <section id="page-library" class="page" hidden>
+        <div class="eyebrow">YOUR KNOWLEDGE BASE <span>02 / 资料库</span></div><h1 class="page-title">积累资料，<span>连接知识。</span></h1><p class="intro">导入教材笔记、设备资料或规程文本，建立自己的电力知识库。</p>
+        <div id="library-scope-controls" class="conversation-controls" hidden><label for="library-scope">导入位置</label><select id="library-scope"><option value="private">我的资料（仅自己可见）</option><option value="public">公共资料（授权用户可见）</option></select><span class="subnote">公共资料仅管理员可以维护。</span></div>
+        <label class="upload-zone" for="file-input"><span class="upload-icon">＋</span><strong>点击导入资料</strong><span>TXT / Markdown（UTF-8，1 MB）· PDF / DOCX（10 MB）</span><input id="file-input" type="file" accept=".txt,.md,.pdf,.docx" multiple></label>
+        <p class="subnote">PDF 支持提取文字并保留页码，最多 200 页；DOCX 提取正文段落和表格。不识别扫描页、图片、文本框、页眉页脚或嵌套表格。扫描资料请先进行 OCR。单份提取文本最多 1 MB；仅保存提取文本，不保存原文件。</p>
+        <div id="import-result" class="notice" role="status" hidden></div>
+        <p id="import-note" class="subnote">导入前请确认资料可用于当前知识库。</p>
+        <form id="search-form" class="search-form"><input id="search-query" type="search" placeholder="在资料中搜索术语、设备或关键词…" minlength="2" maxlength="2000" required aria-label="检索资料"><button class="primary" type="submit">检索资料 ↗</button></form>
+        <div id="search-results" aria-live="polite"></div><div class="section-heading"><h2>全部资料</h2><span>LOCAL LIBRARY</span></div><div id="document-list" class="document-list"></div>
+      </section>
+      <section id="page-reports" class="page" hidden>
+        <div class="eyebrow">FROM EVIDENCE TO INSIGHT <span>03 / 研究报告</span></div><h1 class="page-title">整理依据，<span>形成报告。</span></h1><p class="intro">围绕一个主题检索资料，生成附带引用和资料范围的 Markdown 报告。</p>
+        <form id="report-form" class="report-form"><label for="report-topic">报告主题</label><textarea id="report-topic" rows="4" maxlength="2000" required placeholder="例如：整理功率、电能与功率因数的基础概念学习报告"></textarea><div class="report-form-bottom"><span>报告保存在 data/reports 目录</span><button id="report-button" class="primary" type="submit">生成报告 ↗</button></div></form><div id="report-result" aria-live="polite"></div>
+      </section>
+      <footer class="main-footer"><span>电知 · POWER KNOWLEDGE AGENT</span><span>知识有源，理解有据。</span></footer>
+    </div>
+  </main>
+  <dialog id="document-dialog"><div class="dialog-head"><h2 id="dialog-title">原始资料</h2><button id="close-dialog" class="quiet" aria-label="关闭资料">关闭 ×</button></div><p id="dialog-meta" class="subnote"></p><pre id="document-content"></pre></dialog>
+  <dialog id="memory-dialog"><div class="dialog-head"><h2>长期记忆</h2><button id="memory-close" class="quiet" type="button">关闭 ×</button></div><p class="subnote">保存明确的背景、学习目标和回答偏好，最多 50 条。自动记忆摘自你的原话，可手动纠正。删除记忆不会删除聊天原文；若也需移除上下文，请删除对应会话。</p><div id="memory-list"></div><form id="memory-form"><label for="memory-content">新增 / 编辑记忆</label><textarea id="memory-content" rows="3" maxlength="300" required placeholder="例如：我是电力初学者，希望先举例再解释术语。"></textarea><div class="conversation-controls"><button class="primary" type="submit">保存记忆</button><button id="memory-cancel" class="quiet" type="button">取消编辑</button><button id="memory-clear" class="quiet delete" type="button">清空全部记忆</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <dialog id="accounts-dialog"><div class="dialog-head"><h2>账号管理</h2><button id="accounts-close" class="quiet" type="button">关闭 ×</button></div><p class="subnote">独立账号拥有各自的聊天、记忆、报告和个人资料。禁用账号、重置密码或修改权限会让该账号重新登录。</p><div id="accounts-list" class="accounts-list"></div><form id="account-create-form" class="account-form"><h3>创建账号</h3><label for="account-name">账号</label><input id="account-name" autocomplete="off" pattern="[A-Za-z][A-Za-z0-9_.\-]{2,31}" maxlength="32" placeholder="3～32 位，以英文字母开头" required><label for="account-password">初始密码</label><input id="account-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" placeholder="至少 12 个字符，创建后单独告知用户" required><label for="account-role">角色</label><select id="account-role"><option value="member">普通用户</option><option value="admin">管理员</option></select><label class="memory-toggle"><input id="account-public" type="checkbox" checked>允许阅读和检索公共资料</label><button class="primary" type="submit">创建独立账号</button><p id="account-message" role="status"></p></form></dialog>
+  <dialog id="password-dialog"><div class="dialog-head"><h2 id="password-dialog-title">修改我的密码</h2><button id="password-close" class="quiet" type="button">关闭 ×</button></div><form id="password-form" class="account-form"><label id="current-password-label" for="current-password">当前密码</label><input id="current-password" type="password" autocomplete="current-password" maxlength="128"><label for="new-password">新密码</label><input id="new-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required><label for="confirm-password">确认新密码</label><input id="confirm-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required><button class="primary" type="submit">保存密码</button><p id="password-message" role="status"></p></form></dialog>
+</body>
+</html>

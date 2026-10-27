@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163c32"><title>登录 · 电知</title>
+  <link rel="stylesheet" href="/login.css"><script src="/login.js" defer></script>
+</head>
+<body>
+  <main class="login-shell">
+    <section class="story" aria-labelledby="story-title">
+      <a class="brand" href="/login" aria-label="电知登录"><span class="brand-mark">ϟ</span><span>电知<small>POWER KNOWLEDGE</small></span></a>
+      <div class="story-copy"><p class="eyebrow">KNOWLEDGE. CONNECTED.</p><h1 id="story-title">连接电力知识，<br>点亮每一次<span>理解。</span></h1><p class="story-description">从一个问题开始，让复杂的概念变得清晰。<br>你的电力知识助手，已准备就绪。</p></div>
+      <div class="network" aria-hidden="true">
+        <div class="network-ring ring-one"></div><div class="network-ring ring-two"></div>
+        <div class="network-line line-one"></div><div class="network-line line-two"></div>
+        <span class="network-node node-one"></span><span class="network-node node-two"></span><span class="network-node node-three"></span>
+        <div class="energy-core">ϟ</div><span class="network-label label-one">知识 · 有据可查</span><span class="network-label label-two">对话 · 自然发生</span>
+      </div>
+      <div class="story-footer"><span class="live-dot"></span> 从资料出发，回到依据。<span class="edition">电知 / DEMO</span></div>
+    </section>
+    <section class="entry" aria-labelledby="login-title">
+      <div class="entry-top"><span class="space-tag"><span class="live-dot"></span> 独立账号工作空间</span><span class="entry-index">01 / ACCESS</span></div>
+      <div class="form-wrap">
+        <div class="welcome-symbol" aria-hidden="true">↗</div><p class="eyebrow form-eyebrow">WELCOME TO 电知</p>
+        <h2 id="login-title">欢迎，开始探索。</h2><p class="form-description">使用管理员分配的独立账号，进入你的知识工作空间。</p>
+        <form id="login-form">
+          <label for="username">访问账号</label><div class="field"><span class="field-icon" aria-hidden="true">◎</span><input id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="请输入你的账号" maxlength="80" required></div>
+          <div class="password-label"><label for="password">访问密码</label><span>由管理员分配</span></div>
+          <div class="field"><span class="field-icon" aria-hidden="true">⌑</span><input id="password" name="password" type="password" autocomplete="current-password" placeholder="请输入访问密码" maxlength="256" required autofocus><button id="password-toggle" class="password-toggle" type="button" aria-label="显示密码" aria-pressed="false">显示</button></div>
+          <p id="caps-hint" class="caps-hint" hidden>大写锁定已开启</p>
+          <div id="login-error" class="error-message" role="alert" hidden></div>
+          <button id="login-submit" class="enter-button" type="submit"><span id="login-button-text">进入工作空间</span><span aria-hidden="true">↗</span></button>
+          <p id="login-status" class="login-status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="space-note"><span class="note-icon" aria-hidden="true">◇</span><p><strong>放心探索，独立体验</strong>你的聊天、长期记忆和个人资料按账号隔离。公共资料由管理员授权共享；需要账号请联系管理员。</p></div>
+      </div>
+      <footer class="entry-footer"><span>知识有源，理解有据。</span><span>POWERED BY 电知</span></footer>
+    </section>
+  </main>
+</body>
+</html>

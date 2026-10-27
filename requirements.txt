@@ -1,0 +1,8 @@
+# Tested on Python 3.13; install into the project's .venv.
+langchain==1.4.3
+langchain-openai==1.6.7
+langgraph==1.2.14
+httpx==0.28.1
+psycopg[binary]==3.3.6
+pypdf==6.19.0
+python-docx==1.2.0
